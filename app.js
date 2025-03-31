@@ -9,7 +9,6 @@ const app = express();
 const path = require("path");
 const mongoose = require("mongoose");
 const methodOverride= require("method-override");
-const mongourl= "mongodb://127.0.0.1:27017/QuickStay";
 const  ejsmate= require("ejs-mate");
 // const wrapAsync= require("./utils/wrapAsync.js");
 const expressError= require("./utils/expressErrors.js");
@@ -31,11 +30,15 @@ const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
 
+const MongoStore= require('connect-mongo');
+const mongourl= "mongodb://127.0.0.1:27017/QuickStay";   // local
+const Atlas_cloud_mongo_url= process.env.ATLASDB_URL;    // cloud
 
 // Connect to MongoDB
 async function main() {
-  await mongoose.connect(mongourl);
+  await mongoose.connect(Atlas_cloud_mongo_url);
 }
+
 main()
   .then(() => {
     console.log("Connection to database successful");
@@ -70,20 +73,33 @@ app.use(methodOverride("_method"));
 
 /***************************************************************************************************** */
 const session = require("express-session");
+const store = MongoStore.create({ 
+                                  mongoUrl: Atlas_cloud_mongo_url, 
+                                  crypto: { 
+                                  secret: process.env.SECRET, 
+                                  }, 
+                                  touchAfter: 24*3600, //for Lazy Update 
+                                  });
+
+store.on("error",()=>{
+  console.log("ERROR in MONGO SESSION STORE", err);
+})
+   
+const sessionOption= {  
+                        store,// cloud , remove for local
+                        secret: process.env.SECRET, // Secret to sign the session ID cookie
+                        resave: false, // Prevents saving the session back to the store if it hasn't been modified
+                        saveUninitialized: true, // Forces a session that is "uninitialized" to be saved to the store
+                        cookie: {                   // Set to true if using HTTPS
+                                  // secure: false,
+                                  expires:Date.now()+ 7 * 24 * 60 * 60 * 1000,  // in milliseconds
+                                  maxAge:7 * 24 * 60 * 60 * 1000,
+                                  httpOnly: true
+                                }
+                      }
+
 // Set up session middleware
-app.use(
-  session({
-            secret: "mysupersecretstring", // Secret to sign the session ID cookie
-            resave: false, // Prevents saving the session back to the store if it hasn't been modified
-            saveUninitialized: true, // Forces a session that is "uninitialized" to be saved to the store
-            cookie: {                   // Set to true if using HTTPS
-                      // secure: false,
-                      expires:Date.now()+ 7 * 24 * 60 * 60 * 1000,  // in milliseconds
-                      maxAge:7 * 24 * 60 * 60 * 1000,
-                      httpOnly: true
-                    }
-          })
-);
+app.use(session(sessionOption));   
 
 
 /*********************************************************************************************** */

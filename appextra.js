@@ -13,6 +13,7 @@ const {listingSchema, reviewSchema} = require("./Schema_models/schema_validation
 const Listing = require("./Schema_models/listing.js");
 const Review = require("./Schema_models/review.js");
 
+console.log(process.env.CLOUD_API_KEY);
 
 // Connect to MongoDB
 async function main() {

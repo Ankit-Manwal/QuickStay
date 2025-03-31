@@ -3,6 +3,8 @@ const initData = require("./data.js");
 const Listing = require("../Schema_models/listing.js");
 
 const MONGO_URL = "mongodb://127.0.0.1:27017/QuickStay";
+const Atlas_cloud_mongo_url= process.env.ATLASDB_URL;
+
 
 main()
   .then(() => {
