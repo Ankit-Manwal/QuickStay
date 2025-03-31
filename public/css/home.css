@@ -1,0 +1,67 @@
+/* Fullscreen Background Image (Independent of Other Styles) */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: url('/home_image.jpg') no-repeat center center/cover;
+    z-index: -1; /* Keeps it in the background */
+}
+
+/* Hero Section (Centered in the Middle) */
+.hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100vh; /* Ensures full height */
+    color: white;
+}
+
+/* Hero Text Styling */
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+/* Buttons */
+.buttons.home {
+    display: flex;
+    gap: 20px;
+}
+
+.btn.home {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.primary {
+    background: #ff6600;
+    color: white;
+}
+
+.primary:hover {
+    background: #cc5500;
+}
+
+.secondary {
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+}
+
+.secondary:hover {
+    background: white;
+    color: #000;
+}

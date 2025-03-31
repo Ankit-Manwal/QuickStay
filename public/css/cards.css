@@ -1,0 +1,33 @@
+.listing-card.index {
+    border: none !important;
+    width: 100%; /* Full width to prevent overlap */
+    max-width: 20rem; /* Prevents excessive stretching */
+    margin: 0 auto;
+    border-radius: 1rem !important;
+    display: flex; /* Ensures consistent height */
+    flex-direction: column; /* Stacks image and text properly */
+    height: 100%; /* Ensures all cards are the same height */ /* ✅ Added for uniform card height */
+}
+
+.card-img-top.index {
+    border-radius: 1rem !important;
+    width: 100% !important;
+    height: 20rem; /* Ensures uniform height */
+    object-fit: cover !important; /* Prevents image distortion */
+    flex-shrink: 0; /* Prevents the image from shrinking */ /* ✅ Added to maintain image size */
+}
+
+.card-body.index {
+    padding: 1rem !important;
+    flex-grow: 1; /* Ensures text container fills space */
+    display: flex; /* Enables flex behavior */
+    flex-direction: column; /* Stacks elements properly */
+    justify-content: space-between; /* Spreads out text for consistency */ /* ✅ Added to maintain spacing */
+}
+
+/* Fix for Mobile Screens */
+@media (max-width: 430px) {
+    .col-6 {
+        width: 50% !important; /* Ensures 2 cards per row */
+    }
+}

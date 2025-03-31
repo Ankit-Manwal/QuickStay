@@ -1,0 +1,50 @@
+.navbar {
+    height: auto;
+    background-color: rgb(248, 233, 233);
+    padding: 10px 15px;
+}
+
+.fa-compass {
+    color: rgb(210, 59, 59);
+    font-size: 2rem;
+}
+
+/* Navbar Links */
+.nav-link {
+    color: #222222 !important;
+    font-weight: bold;
+}
+
+/* Search Bar Styling */
+.search-form {
+    width: 40%; /* Centered for PC */
+    min-width: 250px;
+}
+
+/* Mobile View Fixes */
+@media (max-width: 768px) {
+    .navbar-collapse {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .navbar-nav {
+        text-align: left;
+        width: 100%;
+    }
+
+    /* Move search bar to the last in mobile */
+    .search-form {
+        width: 100%;
+        margin-top: 10px;
+        order: 1; /* Moves it after auth links */
+    }
+
+    /* Keep auth links right-aligned */
+    .auth-links {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+    }
+}

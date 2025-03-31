@@ -1,0 +1,47 @@
+.filter-bar {
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.filter {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 15px;
+    margin: 5px;
+    background: white;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: 0.3s ease-in-out;
+    border: 1px solid #ddd;
+}
+
+.filter i {
+    font-size: 16px;
+    color: #ff5733;
+}
+
+.filter:hover {
+    background: #ff5733;
+    color: white;
+    border-color: #ff5733;
+}
+
+.filter:hover i {
+    color: white;
+}
+
+/* Make it scrollable on small screens */
+@media (max-width: 768px) {
+    .filter-bar {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+    }
+}

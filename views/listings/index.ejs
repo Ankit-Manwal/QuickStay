@@ -1,0 +1,43 @@
+<% layout("/layouts/boilerplate") -%>
+
+
+    <body>
+
+        <!-- <form method="GET" action="/listings/new">      create new data -->
+        <!-- <button>Create New Listing</button> -->
+        <!-- </form> -->
+        <%- include("../includes/filterbar.ejs") %>
+
+
+        <div class="row mt-2">
+            <% if (searched_Query) { %>
+                <h3 class="mt-3 mb-4">Searched: "<%= searched_Query %>"</h3>
+            <% } %>
+
+            <% for(let listing of allListings) { %>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-6 mb-4">  
+                    <a href="/listings/<%= listing._id %>" class="listing_links text-decoration-none">
+                        <div class="card listing-card mx-auto index">
+                            <img src="<%= listing.image.url %>"
+                                 class="card-img-top index"
+                                 alt="listing image"
+                                 onerror="this.onerror=null; this.src='https://via.placeholder.com/300x300?text=No+Image';">
+                            
+                            <div class="card-body text-dark index">
+                                <h5 class="card-title"><b><%= listing.title %></b></h5>
+                                <p class="card-text">&#8377; <%= listing.price.toLocaleString('en-IN') %> / night</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            <% } %>
+        </div>
+        
+
+        <!-- <ul>
+      <% for(let listing of allListings) { %>    show all data
+      <li><a href="/listings/<%= listing._id %>"> <%= listing.title %> </a></li>
+      <% } %>
+    </ul> -->
+
+    </body>
